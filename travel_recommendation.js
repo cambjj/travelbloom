@@ -55,12 +55,23 @@ function searching() {
         console.log("search result",result);
         let html = '';
         result.forEach((item) => {
-            html += `            <li>
-            <img src="${item.imageUrl}" alt="">
-            <h2>${item.name}</h2>
-            <p>${item.description}</p>
-            <input class="button" type="button" value="View">
-        </li>`;
+            if(item.hasOwnProperty('cities')){
+                item.cities.forEach((city) => {
+                    html += `            <li>
+                    <img src="${city.imageUrl}" alt="">
+                    <h2>${city.name}</h2>
+                    <p>${city.description}</p>
+                    <input class="button" type="button" value="View">
+                </li>`;
+                });
+            }else {
+                html += `            <li>
+                <img src="${item.imageUrl}" alt="">
+                <h2>${item.name}</h2>
+                <p>${item.description}</p>
+                <input class="button" type="button" value="View">
+            </li>`
+            };
         });
         query('.results').innerHTML = html;
     }
